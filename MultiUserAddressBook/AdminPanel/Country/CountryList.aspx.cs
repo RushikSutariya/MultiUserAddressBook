@@ -40,7 +40,8 @@ public partial class AdminPanel_Country_CountryList : System.Web.UI.Page
         SqlCommand objcmd = new SqlCommand();
         objcmd.Connection = objConn;
         objcmd.CommandType = CommandType.StoredProcedure;
-        objcmd.CommandText = "PR_Country_SelectAll";
+        objcmd.CommandText = "PR_Country_SelectByUserID";
+        objcmd.Parameters.AddWithValue("UserID", Session["UserID"]);
         SqlDataReader objSDR = objcmd.ExecuteReader();
         gvCountry.DataSource = objSDR;
         gvCountry.DataBind();
@@ -95,6 +96,7 @@ public partial class AdminPanel_Country_CountryList : System.Web.UI.Page
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_Country_DeleteByUserIDCountryID";
             objCmd.Parameters.AddWithValue("CountryID", CountryID.ToString());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
 
             objCmd.ExecuteNonQuery();
 

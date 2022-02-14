@@ -131,7 +131,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             objCmd.Parameters.AddWithValue("@Email", strEmail);
             objCmd.Parameters.AddWithValue("@Age", strAge);
             objCmd.Parameters.AddWithValue("@Address", strAddress);
-
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             if (Request.QueryString["ContactID"] != null)
             {
                 #region Update Record
@@ -183,6 +183,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_Coutry_SelectForDropDownList";
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objCmd.ExecuteReader();
 
             #region Read The Data
@@ -223,6 +224,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_State_SelectForDropDownList";
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objCmd.ExecuteReader();
             #region Read The Data
             if (objSDR.HasRows == true)
@@ -262,6 +264,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_City_SelectForDropDownList";
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objCmd.ExecuteReader();
             #region Read The Data
             if (objSDR.HasRows == true)
@@ -301,6 +304,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_ContactCategory_SelectForDropDownList";
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objCmd.ExecuteReader();
 
             #region Read The Data
@@ -345,6 +349,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_Contact_SelectByUserIDContactID";
             objCmd.Parameters.AddWithValue("@ContactID", ContactID.ToString().Trim());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
 
             #region Read the Value and set the controls

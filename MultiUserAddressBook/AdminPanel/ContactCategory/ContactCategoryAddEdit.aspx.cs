@@ -16,7 +16,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
     {
         if (Request.QueryString["ContactCategoryID"] != null)
         {
-            lblMeassage.Text = "Edit Mode | ContactCategoryID= " + Request.QueryString["ContactCategoryID"].ToString();
+            //lblMeassage.Text = "Edit Mode | ContactCategoryID= " + Request.QueryString["ContactCategoryID"].ToString();
             FillControls(Convert.ToInt32(Request.QueryString["ContactCategoryID"]));
 
         }
@@ -50,9 +50,31 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_ContactCategory_Insert";
             objCmd.Parameters.AddWithValue("@ContactCategoryName", strContactCategoryName);
-            objCmd.ExecuteNonQuery();
-            lblMeassage.Text = "Data Inserted SuccessFully";
-            objConn.Close();
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
+            if (Request.QueryString["ContactCategoryID"] != null)
+            {
+                #region Update Record
+                objCmd.Parameters.AddWithValue("ContactCategoryID", Request.QueryString["ContactCategoryID"].ToString().Trim());
+                objCmd.CommandText = "PR_ContactCategory_UpdateByUserIDContactCategoryID";
+                objCmd.ExecuteNonQuery();
+                Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx");
+                #endregion Update Record
+
+            }
+            else
+            {
+                #region Insert Record
+                objCmd.CommandText = "PR_ContactCategory_Insert";
+                objCmd.ExecuteNonQuery();
+                lblMeassage.Text = "Data Inserted SuccessFully";
+                txtContactCategoryName.Text = "";
+                txtContactCategoryName.Focus();
+                #endregion Insert Record
+
+            }
+
+            if (objConn.State == ConnectionState.Open)
+                objConn.Close();
         }
         #endregion Set The Connection And Command Object
         catch (Exception ex)
@@ -61,7 +83,8 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
         }
         finally
         {
-            objConn.Close();
+            if (objConn.State == ConnectionState.Open)
+                objConn.Close();
         }
     }
 
@@ -83,6 +106,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_ContactCategory_SelectByUserIDContactCategoryID";
             objCmd.Parameters.AddWithValue("@ContactCategoryID", ContactCategoryID.ToString().Trim());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
 
             #region Read the Value and set the controls

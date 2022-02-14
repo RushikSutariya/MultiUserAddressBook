@@ -37,6 +37,7 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
         SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString.Trim());
         SqlString strCountryName = SqlString.Null;
         SqlString strCountryCode = SqlString.Null;
+        SqlInt32 strUserID = SqlInt32.Null;
         #endregion Local Variables
 
         try
@@ -76,13 +77,15 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.Parameters.AddWithValue("@CountryName", strCountryName);
             objCmd.Parameters.AddWithValue("@CountryCode", strCountryCode);
-            //objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
+            objCmd.Parameters.AddWithValue("@UserID", Session["UserID"]);
+            //objCmd.Parameters.AddWithValue("@UserID", strUserID);
             #endregion Set Connection & Command Object
 
             if (Request.QueryString["CountryID"] != null)
             {
                 #region Update Record
                 objCmd.Parameters.AddWithValue("@CountryID", Request.QueryString["CountryID"].ToString().Trim());
+                //objCmd.Parameters.AddWithValue("@UserID", Request.QueryString["UserID"].ToString().Trim());
                 objCmd.CommandText = "PR_Country_UpdateByUserIDCountryID";
                 objCmd.ExecuteNonQuery();
                 Response.Redirect("~/AdminPanel/Country/CountryList.aspx", true);
@@ -140,6 +143,7 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_Country_SelectByUserIDCountryID";
             objCmd.Parameters.AddWithValue("@CountryID", CountryID.ToString().Trim());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
 
             #region Read the Value and set the controls

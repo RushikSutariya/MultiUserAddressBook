@@ -94,6 +94,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
             objCmd.Parameters.AddWithValue("@CityName", strCityName);
             objCmd.Parameters.AddWithValue("@STDCode", strCityCode);
             objCmd.Parameters.AddWithValue("@PinCode", strCityPinCode);
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
             if (Request.QueryString["CityID"] != null)
             {
@@ -142,7 +143,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
     private void FillDropDownList()
     {
         #region Set The Connection And Command Object
-        SqlConnection objConn = new SqlConnection("data source = DESKTOP-DRH54DP\\SQLEXPRESS; Initial Catalog= AddressBook; Integrated Security=True");
+        SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
         try
         {
             objConn.Open();
@@ -150,6 +151,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_State_SelectForDropDownList";
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objCmd.ExecuteReader();
 
             #region Read The Data
@@ -159,6 +161,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
                 ddlState.DataValueField = "StateID";
                 ddlState.DataTextField = "StateName";
                 ddlState.DataBind();
+                //ddlState.Items.Insert(0, new ListItem("Select State", "-1"));
             }
             #endregion Read The Data
             ddlState.Items.Insert(0, new ListItem("Select State", "-1"));
@@ -194,6 +197,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_City_SelectByUserIDCityID";
             objCmd.Parameters.AddWithValue("@CityID", CityID.ToString().Trim());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
 
             #region Read the Value and set the controls

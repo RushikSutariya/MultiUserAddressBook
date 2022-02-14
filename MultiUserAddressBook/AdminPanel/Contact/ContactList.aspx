@@ -7,7 +7,7 @@
         <div class="col-md-12 text-center">
             <h2>Contact</h2><br />
             <asp:Label runat="server" ID="lblMessage" EnableViewState="false"></asp:Label><br />
-            <asp:GridView runat="server" ID="gvContact" CssClass="table table-hover" OnRowCommand="gvContact_RowCommand">
+            <asp:GridView runat="server" ID="gvContact" CssClass="table table-hover table-responsive" OnRowCommand="gvContact_RowCommand">
                  <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>

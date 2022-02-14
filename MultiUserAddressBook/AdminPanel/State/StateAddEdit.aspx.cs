@@ -87,6 +87,7 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
             objCmd.Parameters.AddWithValue("@CountryID", strCountryID);
             objCmd.Parameters.AddWithValue("@StateName", strStateName);
             objCmd.Parameters.AddWithValue("@StateCode", strStateCode);
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
 
             if (Request.QueryString["StateID"] != null)
@@ -149,6 +150,7 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_Coutry_SelectForDropDownList";
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objCmd.ExecuteReader();
             #endregion Set Connection & Command Object
 
@@ -192,8 +194,9 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
 
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "PR_Country_SelectByUserIDCountryID";
+            objCmd.CommandText = "PR_State_SelectByUserIDStateID";
             objCmd.Parameters.AddWithValue("@StateID", StateID.ToString().Trim());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
 
             #region Read the Value and set the controls

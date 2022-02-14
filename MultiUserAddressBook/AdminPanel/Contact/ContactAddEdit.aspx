@@ -71,7 +71,7 @@
             BirthDate
         </div>
         <div class="col-md-8">
-            <asp:TextBox runat="server" ID="txtBirthDate" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtBirthDate" CssClass="form-control" TextMode="Date"></asp:TextBox>
         </div>
     </div><br />
      <div class ="row">
@@ -79,7 +79,7 @@
             Email
         </div>
         <div class="col-md-8">
-            <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" TextMode="Email"></asp:TextBox>
         </div>
     </div><br />
     <div class ="row">
@@ -87,7 +87,7 @@
             Age
         </div>
         <div class="col-md-8">
-            <asp:TextBox runat="server" ID="txtAge" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtAge" CssClass="form-control" TextMode="Number"></asp:TextBox>
         </div>
     </div><br />
     <div class ="row">

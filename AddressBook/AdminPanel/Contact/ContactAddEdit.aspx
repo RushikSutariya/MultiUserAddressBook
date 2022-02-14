@@ -12,7 +12,7 @@
             Country
         </div>
         <div class="col-md-8">
-            <asp:DropDownList runat="server" ID="ddlCountryList" CssClass="form-control" ></asp:DropDownList>
+            <asp:DropDownList runat="server" ID="ddlCountryList" CssClass="form-control" OnSelectedIndexChanged="ddlCountryList_SelectedIndexChanged" ></asp:DropDownList>
         </div>
     </div><br />
     <div class="row">
@@ -20,7 +20,7 @@
             State
         </div>
         <div class="col-md-8">
-            <asp:DropDownList runat="server" ID="ddlStateList" CssClass="form-control" ></asp:DropDownList>
+            <asp:DropDownList runat="server" ID="ddlStateList" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlStateList_SelectedIndexChanged"  ></asp:DropDownList>
         </div>
     </div><br />
     <div class="row">
@@ -28,7 +28,7 @@
             City
         </div>
         <div class="col-md-8">
-            <asp:DropDownList runat="server" ID="ddlCityList" CssClass="form-control" ></asp:DropDownList>
+            <asp:DropDownList runat="server" ID="ddlCityList" AutoPostBack="true" CssClass="form-control"  ></asp:DropDownList>
         </div>
     </div><br />
     <div class="row">

@@ -33,7 +33,8 @@ public partial class AdminPanel_ContactCategory_ContactCategoryList : System.Web
             SqlCommand objcmd = new SqlCommand();
             objcmd.Connection = objConn;
             objcmd.CommandType = CommandType.StoredProcedure;
-            objcmd.CommandText = "PR_ContactCategory_SelectAll";
+            objcmd.CommandText = "PR_ContactCategory_SelectByUserID";
+            objcmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objcmd.ExecuteReader();
             gvContactCategory.DataSource = objSDR;
             gvContactCategory.DataBind();
@@ -76,6 +77,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryList : System.Web
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_Country_DeleteByUserIDCountryID";
             objCmd.Parameters.AddWithValue("ContactCategoryID", ContactCategoryID.ToString());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             objCmd.ExecuteNonQuery();
 
             objConn.Close();

@@ -33,7 +33,8 @@ public partial class AdminPanel_City_CityList : System.Web.UI.Page
             SqlCommand objcmd = new SqlCommand();
             objcmd.Connection = objConn;
             objcmd.CommandType = CommandType.StoredProcedure;
-            objcmd.CommandText = "PR_City_SelectAll";
+            objcmd.CommandText = "PR_City_SelectByUserID";
+            objcmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objcmd.ExecuteReader();
             gvCity.DataSource = objSDR;
             gvCity.DataBind();
@@ -63,6 +64,7 @@ public partial class AdminPanel_City_CityList : System.Web.UI.Page
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_City_DeleteByUserIDCityID";
             objCmd.Parameters.AddWithValue("CityID", CityID.ToString());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             objCmd.ExecuteNonQuery();
 
             objConn.Close();

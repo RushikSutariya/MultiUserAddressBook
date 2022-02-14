@@ -18,9 +18,10 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
         
         if (!Page.IsPostBack)
         {
+
             FillDropDownCountry();
-            FillDropDownState();
-            FillDropDownCity();
+
+            
             FillDropDownContactCategory();
 
             if (Request.QueryString["ContactID"] != null)
@@ -222,7 +223,8 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
 
         SqlCommand objCmd = objConn.CreateCommand();
         objCmd.CommandType = CommandType.StoredProcedure;
-        objCmd.CommandText = "PR_State_SelectForDropDownList";
+        objCmd.CommandText = "PR_State_SelectForDropDownListByCountryID";
+        objCmd.Parameters.AddWithValue("@CountryID", ddlCountryList.SelectedValue);
         SqlDataReader objSDR = objCmd.ExecuteReader();
         #region Read The Data
         if (objSDR.HasRows == true)
@@ -261,7 +263,8 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
 
         SqlCommand objCmd = objConn.CreateCommand();
         objCmd.CommandType = CommandType.StoredProcedure;
-        objCmd.CommandText = "PR_City_SelectForDropDownList";
+        objCmd.CommandText = "PR_City_SelectForDropDownListByStateID";
+        objCmd.Parameters.AddWithValue("@StateID", ddlStateList.SelectedValue);
         SqlDataReader objSDR = objCmd.ExecuteReader();
        #region Read The Data 
         if (objSDR.HasRows == true)
@@ -429,4 +432,16 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
     }
 
     #endregion Cancle Event
+    
+    
+    protected void ddlCountryList_SelectedIndexChanged(object sender, EventArgs e)
+{
+    
+    FillDropDownState();
+}
+    protected void ddlStateList_SelectedIndexChanged(object sender, EventArgs e)
+{
+    FillDropDownCity();
+
+}
 }

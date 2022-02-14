@@ -33,7 +33,8 @@ public partial class AdminPanel_State_StateList : System.Web.UI.Page
             SqlCommand objcmd = new SqlCommand();
             objcmd.Connection = objConn;
             objcmd.CommandType = CommandType.StoredProcedure;
-            objcmd.CommandText = "PR_State_SelectAll";
+            objcmd.CommandText = "PR_State_SelectByUserID";
+            objcmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objcmd.ExecuteReader();
             gvState.DataSource = objSDR;
             gvState.DataBind();
@@ -85,6 +86,7 @@ public partial class AdminPanel_State_StateList : System.Web.UI.Page
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_State_DeleteByUserIDStateID";
             objCmd.Parameters.AddWithValue("StateID", StateID.ToString());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             objCmd.ExecuteNonQuery();
 
             objConn.Close();

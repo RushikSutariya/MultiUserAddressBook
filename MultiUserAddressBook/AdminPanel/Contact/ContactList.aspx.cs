@@ -34,7 +34,8 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             SqlCommand objcmd = new SqlCommand();
             objcmd.Connection = objConn;
             objcmd.CommandType = CommandType.StoredProcedure;
-            objcmd.CommandText = "PR_Contact_SelectAll";
+            objcmd.CommandText = "PR_Contact_SelectByUserID";
+            objcmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objcmd.ExecuteReader();
             gvContact.DataSource = objSDR;
             gvContact.DataBind();
@@ -84,6 +85,7 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.CommandText = "PR_Contact_DeleteByUserIContactID";
             objCmd.Parameters.AddWithValue("ContactID", ContactID.ToString());
+            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             objCmd.ExecuteNonQuery();
 
             objConn.Close();
