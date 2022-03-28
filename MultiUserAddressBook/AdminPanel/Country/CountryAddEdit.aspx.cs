@@ -20,7 +20,6 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
             {
                 //lblMessage.Text = "Edit  Mode | CountryID = " + Request.QueryString["CountryID"].ToString();
                 FillControls(Convert.ToInt32(DropDownFillMethods.Base64decode(Request.QueryString["CountryID"])));
-                //FillControls(Convert.ToInt32(DropDownFillMethods.Base64decode(Page.RouteData.Values["CountryID"].ToString())));
             }
             else
             {
@@ -82,7 +81,7 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
             //objCmd.Parameters.AddWithValue("@UserID", strUserID);
             #endregion Set Connection & Command Object
 
-            if (DropDownFillMethods.Base64decode(Request.QueryString["CountryID"].ToString().Trim()) != null)
+            if (Request.QueryString["CountryID"] != null)
             {
                 #region Update Record
                 objCmd.CommandText = "PR_Country_UpdateByUserIDCountryID";

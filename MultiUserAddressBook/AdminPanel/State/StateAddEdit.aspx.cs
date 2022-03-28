@@ -90,7 +90,7 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
             objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
 
-            if ( DropDownFillMethods.Base64decode(Request.QueryString["StateID"].ToString().Trim()) != null)
+            if (Request.QueryString["StateID"] != null)
             {
                 #region Update Record
                 //edit mode
@@ -106,9 +106,10 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
                 //Add Mode
                 objCmd.CommandText = "PR_State_Insert";
                 objCmd.ExecuteNonQuery();
-
+                
+                lblMessage.ForeColor = System.Drawing.Color.Green;
                 lblMessage.Text = "Data Inserted Successfully";
-                Response.Redirect("~/AdminPanel/State/StateList.aspx", true);
+                //Response.Redirect("~/AdminPanel/State/StateList.aspx", true);
                 txtStateName.Text = "";
                 txtStateCode.Text = "";
                 ddlCountry.SelectedIndex = 0;

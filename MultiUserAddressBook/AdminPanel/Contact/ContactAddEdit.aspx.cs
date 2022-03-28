@@ -220,7 +220,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                 lblMeassage.ForeColor = System.Drawing.Color.Green;
                 lblMeassage.Text = "Data Inserted Sucessfully with ContactID = " + ContactID.ToString();
                 //Response.Redirect("~/AdminPanel/Contact/ContactList.aspx", true);
-                Response.Redirect("~/AdminPanel/Contact/List");
+                //Response.Redirect("~/AdminPanel/Contact/List");
 
                 #endregion Insert Record
             }

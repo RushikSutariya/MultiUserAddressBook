@@ -73,7 +73,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
             objCmd.Parameters.AddWithValue("@ContactCategoryName", strContactCategoryName);
             objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
 
-            if (DropDownFillMethods.Base64decode(Request.QueryString["ContactCategoryID"].ToString().Trim()) != null)
+            if (Request.QueryString["ContactCategoryID"] != null)
             {
                 #region Update Record
                 objCmd.Parameters.AddWithValue("ContactCategoryID", Convert.ToInt32(DropDownFillMethods.Base64decode(Request.QueryString["ContactCategoryID"].ToString().Trim())));
@@ -90,8 +90,11 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
                 #region Insert Record
                 objCmd.CommandText = "PR_ContactCategory_Insert";
                 objCmd.ExecuteNonQuery();
+
                 //Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx");
-                Response.Redirect("~/AdminPanel/ContactCategory/List");
+                //Response.Redirect("~/AdminPanel/ContactCategory/List");
+
+                lblMeassage.ForeColor = System.Drawing.Color.Green;
                 lblMeassage.Text = "Data Inserted SuccessFully";
                 txtContactCategoryName.Text = "";
                 txtContactCategoryName.Focus();

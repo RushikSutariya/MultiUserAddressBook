@@ -96,7 +96,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
             objCmd.Parameters.AddWithValue("@PinCode", strCityPinCode);
             objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
-            if (DropDownFillMethods.Base64decode(Request.QueryString["CityID"].ToString().Trim()) != null)
+            if (Request.QueryString["CityID"] != null)
             {
                 #region Update Record
                 //edit mode
@@ -113,13 +113,14 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
                 //Add Mode
                 objCmd.CommandText = "PR_City_Insert";
                 objCmd.ExecuteNonQuery();
-
+                lblMessage.ForeColor = System.Drawing.Color.Green;
                 lblMessage.Text = "Data Inserted Successfully";
                //Response.Redirect("~/AdminPanel/City/CityList.aspx", true);
-                Response.Redirect(GetRouteUrl("AdminPanelCityList"));
+               // Response.Redirect("AdminPanel/City/List");
                 txtCityName.Text = "";
                 txtCityCode.Text = "";
                 ddlState.SelectedIndex = 0;
+                txtCityPinCode.Text = "";
                 ddlState.Focus();
                 #endregion Insert Record
             }
