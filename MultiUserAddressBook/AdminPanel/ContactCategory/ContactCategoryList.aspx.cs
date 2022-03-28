@@ -75,7 +75,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryList : System.Web
 
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "PR_Country_DeleteByUserIDCountryID";
+            objCmd.CommandText = "PR_ContactCategory_DeleteByUserIDContactCategoryID";
             objCmd.Parameters.AddWithValue("ContactCategoryID", ContactCategoryID.ToString());
             objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             objCmd.ExecuteNonQuery();

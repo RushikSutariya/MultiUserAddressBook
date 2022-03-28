@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" Runat="Server">
     <h2 align="center">State Add Edit Page</h2><br />
         <div class="text-center">
-           <h4> <asp:Label runat="server" ID="lblMessage" EnableViewState="false" ></asp:Label> </h4>
+            <asp:Label runat="server" ID="lblMessage" ForeColor="Red" EnableViewState="false" ></asp:Label> 
         </div><br/>
     <div class="row">
         <div class="col-md-4">
@@ -17,10 +17,11 @@
     </div><br />
     <div class="row">
         <div class="col-md-4">
-            State Name
+          <a style="color:red;">*</a> State Name
         </div>
         <div class="col-md-8">
-                <asp:TextBox runat="server" ID="txtStateName" CssClass="form-control"></asp:TextBox>
+             <asp:TextBox runat="server" ID="txtStateName"  placeholder ="State Name" CssClass="form-control"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="rvfStateName" runat="server" BackColor="White" ControlToValidate="txtStateName" Display="Dynamic" ErrorMessage="Enter The StateName" ForeColor="Red"></asp:RequiredFieldValidator>
         </div>
     </div><br />
     <div class="row">
@@ -28,7 +29,7 @@
             State Code
         </div>
         <div class="col-md-8">
-                <asp:TextBox runat="server" ID="txtStateCode" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtStateCode"  placeholder ="State Code" CssClass="form-control"></asp:TextBox>
         </div>
     </div><br />
     <div class="row">

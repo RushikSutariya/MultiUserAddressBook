@@ -10,15 +10,16 @@
     </div><br />
      <div class="row">
         <div class="col-md-12 text-center">
-            <asp:Label runat="server" ID="lblMessage" EnableViewState="false"></asp:Label>
+            <asp:Label runat="server" ID="lblMessage"  ForeColor="Red" EnableViewState="false"></asp:Label>
         </div>
     </div><br />
     <div class="row">
         <div class="col-md-4">
-            Country Name :
+           <a style="color:red;">*</a> Country Name :
         </div>
         <div class="col-md-8">
-            <asp:TextBox runat="server" ID="txtCountryName" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtCountryName" placeholder ="Country Name" CssClass="form-control"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="rvfCountryName" runat="server" BackColor="White" ControlToValidate="txtCountryName" Display="Dynamic" ErrorMessage="Enter The CountryName" ForeColor="Red"></asp:RequiredFieldValidator>
         </div>
     </div><br />
     <div class="row">
@@ -26,7 +27,7 @@
             Country Code :
         </div>
         <div class="col-md-8">
-            <asp:TextBox runat="server" ID="txtCountryCode" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtCountryCode"  placeholder ="Country Code" CssClass="form-control"></asp:TextBox>
         </div>
     </div><br />
     <div class="row">

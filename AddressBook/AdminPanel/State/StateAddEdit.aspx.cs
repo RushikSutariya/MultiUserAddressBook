@@ -20,12 +20,12 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
 
             if (Request.QueryString["StateID"] != null)
             {
-                lblMessage.Text = "Edit  Mode | StateID = " + Request.QueryString["StateID"].ToString();
+                //lblMessage.Text = "Edit  Mode | StateID = " + Request.QueryString["StateID"].ToString();
                 FillControls(Convert.ToInt32(Request.QueryString["StateID"]));
             }
             else
             {
-                lblMessage.Text = "Add Mode";
+                //lblMessage.Text = "Add Mode";
             }
 
 

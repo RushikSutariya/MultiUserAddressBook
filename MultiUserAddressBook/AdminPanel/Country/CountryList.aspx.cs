@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 public partial class AdminPanel_Country_CountryList : System.Web.UI.Page
 {
     
-         #region Load Event
+    #region Load Event
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)

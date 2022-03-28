@@ -14,7 +14,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row" style="font-family:Bahnschrift; background-color:#dedcdc">
                 <div class="col-md-12 text-center">
                     <h1>Address Book</h1>

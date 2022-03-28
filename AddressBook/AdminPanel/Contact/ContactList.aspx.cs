@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -57,6 +58,28 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
     #region gvContact RowCommand
     protected void gvContact_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        String strPath = "";
+
+        SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
+        objConn.Open();
+
+        SqlCommand obj = objConn.CreateCommand();
+        obj.CommandType = CommandType.StoredProcedure;
+        obj.CommandText = "PR_Contact_ContactPhoto";
+        obj.Parameters.AddWithValue("@ContactID", e.CommandArgument.ToString().Trim());
+        SqlDataReader objSDR = obj.ExecuteReader();
+
+        while(objSDR.Read())
+        {
+            strPath = objSDR["FilePath"].ToString().Trim();
+        }
+
+        FileInfo file = new FileInfo(Server.MapPath(strPath));
+        if(file.Exists)
+        {
+            file.Delete();
+        }
+        objConn.Close();
         #region Delete Record
         if (e.CommandName == "DeleteRecord")
         {

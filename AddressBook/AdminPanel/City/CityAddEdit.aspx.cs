@@ -113,7 +113,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
                 objCmd.ExecuteNonQuery();
 
                 lblMessage.Text = "Data Inserted Successfully";
-                Response.Redirect("~/AdminPanel/City/List.aspx", true);
+                Response.Redirect("~/AdminPanel/City/CityList.aspx", true);
                 txtCityName.Text = "";
                 txtCityCode.Text = "";
                 ddlState.SelectedIndex = 0;

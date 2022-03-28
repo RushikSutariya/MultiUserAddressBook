@@ -21,7 +21,7 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
             if (Request.QueryString["StateID"] != null)
             {
                 //lblMessage.Text = "Edit  Mode | StateID = " + Request.QueryString["StateID"].ToString();
-                FillControls(Convert.ToInt32(Request.QueryString["StateID"]));
+                FillControls(Convert.ToInt32(DropDownFillMethods.Base64decode(Request.QueryString["StateID"])));
             }
             else
             {
@@ -90,11 +90,11 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
             objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             #endregion Set Connection & Command Object
 
-            if (Request.QueryString["StateID"] != null)
+            if ( DropDownFillMethods.Base64decode(Request.QueryString["StateID"].ToString().Trim()) != null)
             {
                 #region Update Record
                 //edit mode
-                objCmd.Parameters.AddWithValue("@StateID", Request.QueryString["StateID"].ToString().Trim());
+                objCmd.Parameters.AddWithValue("@StateID", Convert.ToInt32(DropDownFillMethods.Base64decode(Request.QueryString["StateID"].ToString().Trim())));
                 objCmd.CommandText = "PR_State_UpdateByUserIDStateID";
                 objCmd.ExecuteNonQuery();
                 Response.Redirect("~/AdminPanel/State/StateList.aspx", true);
@@ -140,43 +140,7 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
     #region Fill DropDownList
     protected void FillDropDownList()
     {
-        SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString.Trim());
-        try
-        {
-            #region Set Connection & Command Object
-            if (objConn.State != ConnectionState.Open)
-                objConn.Open();
-
-            SqlCommand objCmd = objConn.CreateCommand();
-            objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "PR_Coutry_SelectForDropDownList";
-            objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
-            SqlDataReader objSDR = objCmd.ExecuteReader();
-            #endregion Set Connection & Command Object
-
-            if (objSDR.HasRows == true)
-            {
-                ddlCountry.DataSource = objSDR;
-                ddlCountry.DataValueField = "CountryID";
-                ddlCountry.DataTextField = "CountryName";
-                ddlCountry.DataBind();
-            }
-
-            ddlCountry.Items.Insert(0, new ListItem("Select Country", "-1"));
-
-            if (objConn.State == ConnectionState.Open)
-                objConn.Close();
-        }
-        catch (Exception ex)
-        {
-            lblMessage.Text = ex.Message;
-        }
-        finally
-        {
-            if (objConn.State == ConnectionState.Open)
-                objConn.Close();
-        }
-
+        DropDownFillMethods.DropDownListCountry(ddlCountry, Session["UserID"]);
     }
     #endregion Fill DropDownList
 
@@ -246,7 +210,8 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
     #region Cancle Event
     protected void btnStateCancle_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/AdminPanel/State/StateList.aspx", true);
+        //Response.Redirect("~/AdminPanel/State/StateList.aspx", true);
+        Response.Redirect("~/AdminPanel/State/List");
     }
     #endregion Cancle Event
 }

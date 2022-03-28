@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -34,7 +34,7 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             SqlCommand objcmd = new SqlCommand();
             objcmd.Connection = objConn;
             objcmd.CommandType = CommandType.StoredProcedure;
-            objcmd.CommandText = "PR_Contact_SelectByUserID";
+            objcmd.CommandText = "PR_Contact_SelectAllByUserID";
             objcmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             SqlDataReader objSDR = objcmd.ExecuteReader();
             gvContact.DataSource = objSDR;
@@ -83,13 +83,13 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
 
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "PR_Contact_DeleteByUserIContactID";
+            objCmd.CommandText = "PR_Contact_DeleteByUserIDContactID";
             objCmd.Parameters.AddWithValue("ContactID", ContactID.ToString());
             objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
             objCmd.ExecuteNonQuery();
 
             objConn.Close();
-
+            lblMessage2.Text = "Data Deleted Successfully";
             FillGridView();
         }
         #endregion Set The Connection And Command Object

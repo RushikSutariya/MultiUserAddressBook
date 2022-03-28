@@ -18,12 +18,12 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
         {
             if (Request.QueryString["CountryID"] != null)
             {
-                lblMessage.Text = "Edit  Mode | CountryID = " + Request.QueryString["CountryID"].ToString();
+                //lblMessage.Text = "Edit  Mode | CountryID = " + Request.QueryString["CountryID"].ToString();
                 FillControls(Convert.ToInt32(Request.QueryString["CountryID"]));
             }
             else
             {
-                lblMessage.Text = "Add Mode";
+                //lblMessage.Text = "Add Mode";
             }
 
         }

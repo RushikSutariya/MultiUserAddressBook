@@ -14,15 +14,18 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
     #region Load Event
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.QueryString["ContactCategoryID"] != null)
+        if (!Page.IsPostBack)
         {
-            //lblMeassage.Text = "Edit Mode | ContactCategoryID= " + Request.QueryString["ContactCategoryID"].ToString();
-            FillControls(Convert.ToInt32(Request.QueryString["ContactCategoryID"]));
+            if (Request.QueryString["ContactCategoryID"] != null)
+            {
+                //lblMeassage.Text = "Edit Mode | ContactCategoryID= " + Request.QueryString["ContactCategoryID"].ToString();
+                FillControls(Convert.ToInt32(DropDownFillMethods.Base64decode(Request.QueryString["ContactCategoryID"].ToString().Trim())));
 
-        }
-        else
-        {
-            lblMeassage.Text = "Add Mode";
+            }
+            else
+            {
+                //lblMeassage.Text = "Add Mode";
+            }
         }
     }
 
@@ -36,28 +39,49 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
         #endregion Local Variable
 
         #region Server Side Validation
+
+        string strErrorMessage = "";
+
+        if (txtContactCategoryName.Text.Trim() == "")
+            strErrorMessage += "-Please Enter The ContatCategory Name";
+        
+        if (strErrorMessage != "")
+        {
+            lblMeassage.Text = strErrorMessage;
+            return;
+        }
+
+        #endregion #region Server Side Validation
+
+        #region Gather The Information
+        
         if (txtContactCategoryName.Text.Trim() != "")
             strContactCategoryName = txtContactCategoryName.Text.Trim();
-        #endregion Server Side Validation
+
+
+        #endregion  Gather The Information
 
         #region Set The Connection And Command Object
         SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
         try
         {
-            objConn.Open();
+            if (objConn.State != ConnectionState.Open)
+                objConn.Open();
 
             SqlCommand objCmd = objConn.CreateCommand();
             objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "PR_ContactCategory_Insert";
             objCmd.Parameters.AddWithValue("@ContactCategoryName", strContactCategoryName);
             objCmd.Parameters.AddWithValue("UserID", Session["UserID"]);
-            if (Request.QueryString["ContactCategoryID"] != null)
+
+            if (DropDownFillMethods.Base64decode(Request.QueryString["ContactCategoryID"].ToString().Trim()) != null)
             {
                 #region Update Record
-                objCmd.Parameters.AddWithValue("ContactCategoryID", Request.QueryString["ContactCategoryID"].ToString().Trim());
+                objCmd.Parameters.AddWithValue("ContactCategoryID", Convert.ToInt32(DropDownFillMethods.Base64decode(Request.QueryString["ContactCategoryID"].ToString().Trim())));
                 objCmd.CommandText = "PR_ContactCategory_UpdateByUserIDContactCategoryID";
                 objCmd.ExecuteNonQuery();
-                Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx");
+                //Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx");
+                Response.Redirect("~/AdminPanel/ContactCategory/List");
+                lblMeassage.Text = "Data Updated Successfully";               
                 #endregion Update Record
 
             }
@@ -66,6 +90,8 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
                 #region Insert Record
                 objCmd.CommandText = "PR_ContactCategory_Insert";
                 objCmd.ExecuteNonQuery();
+                //Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx");
+                Response.Redirect("~/AdminPanel/ContactCategory/List");
                 lblMeassage.Text = "Data Inserted SuccessFully";
                 txtContactCategoryName.Text = "";
                 txtContactCategoryName.Focus();
@@ -148,7 +174,8 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
     #region Cancle Event
     protected void btnCancle_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx", true);
+        //Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx", true);
+        Response.Redirect("~/AdminPanel/ContactCategory/List");
     }
 
     #endregion Cancle Event

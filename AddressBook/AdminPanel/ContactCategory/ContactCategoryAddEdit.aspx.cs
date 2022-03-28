@@ -14,15 +14,18 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
     #region Load Event
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.QueryString["ContactCategoryID"] != null)
+        if (!Page.IsPostBack)
         {
-            lblMeassage.Text = "Edit Mode | ContactCategoryID= " + Request.QueryString["ContactCategoryID"].ToString();
-            FillControls(Convert.ToInt32(Request.QueryString["ContactCategoryID"]));
+            if (Request.QueryString["ContactCategoryID"] != null)
+            {
+                //lblMeassage.Text = "Edit Mode | ContactCategoryID= " + Request.QueryString["ContactCategoryID"].ToString();
+                FillControls(Convert.ToInt32(Request.QueryString["ContactCategoryID"]));
 
-        }
-        else
-        {
-            lblMeassage.Text = "Add Mode";
+            }
+            else
+            {
+                //lblMeassage.Text = "Add Mode";
+            }
         }
     }
 
@@ -33,6 +36,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
     {
         #region Local Variable
         SqlString strContactCategoryName = SqlString.Null;
+        
         #endregion Local Variable
 
         #region Server Side Validation
@@ -48,10 +52,29 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
 
         SqlCommand objCmd = objConn.CreateCommand();
         objCmd.CommandType = CommandType.StoredProcedure;
-        objCmd.CommandText = "PR_ContactCategory_Insert";
         objCmd.Parameters.AddWithValue("@ContactCategoryName", strContactCategoryName);
-        objCmd.ExecuteNonQuery();
-        lblMeassage.Text = "Data Inserted SuccessFully";
+        if (Request.QueryString["ContactCategoryID"] != null)
+        {
+            #region Update Record
+            
+            objCmd.Parameters.AddWithValue("@ContactCategoryID", Request.QueryString["ContactCategoryID"].ToString().Trim());
+            objCmd.CommandText = "PR_ContactCategory_UpdateByPK";
+            objCmd.ExecuteNonQuery();
+            Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx", true);
+            #endregion Update Record
+        }
+        else
+        {
+            #region Insert Record
+           
+            objCmd.CommandText = "PR_ContactCategory_Insert";
+            objCmd.ExecuteNonQuery();
+            lblMeassage.Text = "Data Inserted Successfully";
+            Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx", true);
+
+            #endregion Insert Record
+        }   
+        
         objConn.Close();
         }
         #endregion Set The Connection And Command Object

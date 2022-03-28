@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" Runat="Server">
      <h2 align="center">City Add Edit Page</h2><br /><br />
      <div class="text-center">   
-           <h4> <asp:Label runat="server" ID="lblMessage" EnableViewState="false" ></asp:Label> </h4>
+            <asp:Label runat="server" ID="lblMessage" ForeColor="Red" EnableViewState="false" ></asp:Label> 
     </div><br />
     <div class="row">
         <div class="col-md-4">
@@ -17,10 +17,11 @@
     </div><br />
     <div class="row">
         <div class="col-md-4">
-            City Name
+           <a style="color:red;">*</a> City Name
         </div>
         <div class="col-md-8">
-                <asp:TextBox runat="server" ID="txtCityName" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox runat="server" ID="txtCityName" placeholder ="City Name" CssClass="form-control"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="rvfCityName" runat="server" BackColor="White" ControlToValidate="txtCityName" Display="Dynamic" ErrorMessage="Enter The CityName" ForeColor="Red"></asp:RequiredFieldValidator>
         </div>
     </div><br />
     <div class="row">
@@ -28,7 +29,7 @@
             City Code
         </div>
         <div class="col-md-8">
-                <asp:TextBox runat="server" ID="txtCityCode" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtCityCode" placeholder ="City Code" CssClass="form-control"></asp:TextBox>
         </div>
     </div><br />
     <div class="row">
@@ -36,7 +37,7 @@
             City Pin Code
         </div>
         <div class="col-md-8">
-                <asp:TextBox runat="server" ID="txtCityPinCode" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="txtCityPinCode" placeholder ="City Pin Code" CssClass="form-control"></asp:TextBox>
         </div>
     </div><br />
     <div class="row">

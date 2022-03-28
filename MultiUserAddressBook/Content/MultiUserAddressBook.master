@@ -8,6 +8,7 @@
     <link href="Css/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="Css/bootstrap.min.css" rel="stylesheet" />
     <script src="Js/bootstrap.bundle.min.js"></script>
+    <link href="Css/Custom.css" rel="stylesheet" />
     <asp:ContentPlaceHolder id="cphHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -15,28 +16,24 @@
     <form id="form1" runat="server">
      <div>
         <div class="container">
-            <div class="row" style="font-family:Bahnschrift; background-color:#dedcdc">
-                <div class="col-md-12 text-center">
-                    <h1>Address Book</h1>
-                </div>  
+            <div class="row" style="font-family:Bahnschrift">
                 <div class="col-md-12">
-                     <asp:HyperLink runat="server" ID="hlCountry" Text="Country" NavigateUrl="~/AdminPanel/Country/CountryList.aspx" style="color:black"></asp:HyperLink>&nbsp;&nbsp | &nbsp;&nbsp 
-                     <asp:HyperLink runat="server" ID="hlState" Text="State" NavigateUrl="~/AdminPanel/State/StateList.aspx" style="color:black"></asp:HyperLink> &nbsp;&nbsp | &nbsp;&nbsp 
-                     <asp:HyperLink runat="server" ID="hlCity" Text="City" NavigateUrl="~/AdminPanel/City/CityList.aspx" style="color:black"></asp:HyperLink>&nbsp;&nbsp | &nbsp;&nbsp 
-                     <asp:HyperLink runat="server" ID="hlContactCategory" Text="ContactCategory" NavigateUrl="~/AdminPanel/ContactCategory/ContactCategoryList.aspx" style="color:black"></asp:HyperLink>&nbsp;&nbsp | &nbsp;&nbsp 
-                     <asp:HyperLink runat="server" ID="hlContact" Text="Contact" NavigateUrl="~/AdminPanel/Contact/ContactList.aspx" style="color:black"></asp:HyperLink>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
-                     <asp:HyperLink runat="server" ID="hlCountryAdd" Text="CountryAdd" NavigateUrl="~/AdminPanel/Country/CountryAddEdit.aspx" style="color:black"></asp:HyperLink>&nbsp;&nbsp | &nbsp;&nbsp 
-                     <asp:HyperLink runat="server" ID="hlStateAdd" Text="StateAdd" NavigateUrl="~/AdminPanel/State/StateAddEdit.aspx" style="color:black"></asp:HyperLink> &nbsp;&nbsp | &nbsp;&nbsp 
-                     <asp:HyperLink runat="server" ID="hlCityAdd" Text="CityAdd" NavigateUrl="~/AdminPanel/City/CityAddEdit.aspx" style="color:black"></asp:HyperLink>&nbsp;&nbsp | &nbsp;&nbsp 
-                     <asp:HyperLink runat="server" ID="hlContactCategoryAdd" Text="ContactCategoryAdd" NavigateUrl="~/AdminPanel/ContactCategory/ContactCategoryAddEdit.aspx" style="color:black"></asp:HyperLink>&nbsp;&nbsp | &nbsp;&nbsp 
-                     <asp:HyperLink runat="server" ID="hlContactAdd" Text="ContactAdd" NavigateUrl="~/AdminPanel/Contact/ContactAddEdit.aspx" style="color:black"></asp:HyperLink>
-                </div>   
-                                
-            </div><hr />
-            <div class="col-md-12" align="right">
+                    <h1>MultiUser AddressBook</h1>
+                </div>
+            </div><br />
+                <div class="row">
+                     <div class="col-md-9">
+                      <asp:HyperLink runat="server" ID="hlCountry" Text="Country" ToolTip="Go To The Country List Page" NavigateUrl="~/AdminPanel/Country/List" style="color:black" CssClass="button button1 button:hover"  ></asp:HyperLink>&nbsp;&nbsp | &nbsp;&nbsp 
+                     <asp:HyperLink runat="server" ID="hlState" Text="State" ToolTip="Go To The State List Page" NavigateUrl="~/AdminPanel/State/List" style="color:black" CssClass="button button1 button:hover" ></asp:HyperLink> &nbsp;&nbsp | &nbsp;&nbsp 
+                     <asp:HyperLink runat="server" ID="hlCity" Text="City" ToolTip="Go To The City List Page" NavigateUrl="~/AdminPanel/City/List" style="color:black" CssClass="button button1 button:hover"></asp:HyperLink>&nbsp;&nbsp | &nbsp;&nbsp 
+                     <asp:HyperLink runat="server" ID="hlContactCategory" Text="ContactCategory" ToolTip="Go To The ContactCategory List Page" NavigateUrl="~/AdminPanel/ContactCategory/List" style="color:black" CssClass="button button1 button:hover"></asp:HyperLink>&nbsp;&nbsp | &nbsp;&nbsp 
+                     <asp:HyperLink runat="server" ID="hlContact" Text="Contact" ToolTip="Go To The Contact List Page" NavigateUrl="~/AdminPanel/Contact/List" style="color:black" CssClass="button button1 button:hover"></asp:HyperLink>
+                     </div>
+                    <div class="col-md-3">
                         <asp:Label ID="lblmessage" runat="server" EnableViewState="false"></asp:Label>&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
-                        <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-danger  btn-sm"  Text="Logout" OnClick="btnLogout_Click"/>
-             </div>
+                          <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-danger  btn-sm" ToolTip="Click To This Button User Logout!!"  Text="Logout" OnClick="btnLogout_Click"/>
+                    </div>          
+                </div>  <br />
             <div class="row">
                 <div class="col-md-12">
                             <asp:ContentPlaceHolder id="cphMainContent" runat="server">           

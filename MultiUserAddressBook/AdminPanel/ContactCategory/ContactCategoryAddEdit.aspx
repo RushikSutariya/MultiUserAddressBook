@@ -5,14 +5,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMainContent" Runat="Server">
     <h2 align="center">ContactCategory Add Edit Page</h2><br /><br />
      <div class="text-center">
-           <h4> <asp:Label runat="server" ID="lblMeassage" EnableViewState="false" ></asp:Label> </h4>
+            <asp:Label runat="server" ID="lblMeassage" ForeColor="Red" EnableViewState="false" ></asp:Label> 
     </div><br />
     <div class="row">
         <div class="col-md-4">
-            ContactCategoryName
+           <a style="color:red;">*</a> ContactCategoryName
         </div>
         <div class="col-md-8">
-            <asp:textbox runat="server" ID="txtContactCategoryName" CssClass="form-control"></asp:textbox>
+            <asp:textbox runat="server" ID="txtContactCategoryName"  placeholder ="ContactCategory Name" CssClass="form-control"></asp:textbox>
+            <asp:RequiredFieldValidator ID="rvfContactCategoryName" runat="server" BackColor="White" ControlToValidate="txtContactCategoryName" Display="Dynamic" ErrorMessage="Enter The ContactCategoryName" ForeColor="Red"></asp:RequiredFieldValidator>
         </div>
     </div><br />
     <div class="row">

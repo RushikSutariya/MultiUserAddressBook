@@ -12,7 +12,7 @@
             Country
         </div>
         <div class="col-md-8">
-            <asp:DropDownList runat="server" ID="ddlCountryList" CssClass="form-control" OnSelectedIndexChanged="ddlCountryList_SelectedIndexChanged" ></asp:DropDownList>
+            <asp:DropDownList runat="server" ID="ddlCountryList" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlCountryList_SelectedIndexChanged" ></asp:DropDownList>
         </div>
     </div><br />
     <div class="row">
@@ -20,7 +20,7 @@
             State
         </div>
         <div class="col-md-8">
-            <asp:DropDownList runat="server" ID="ddlStateList" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlStateList_SelectedIndexChanged"  ></asp:DropDownList>
+            <asp:DropDownList runat="server" ID="ddlStateList" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="ddlstatelist_selectedindexchanged"  ></asp:DropDownList>
         </div>
     </div><br />
     <div class="row">
@@ -36,7 +36,8 @@
             ContactCategory
         </div>
         <div class="col-md-8">
-            <asp:DropDownList runat="server" ID="ddlContactCategory" CssClass="form-control" ></asp:DropDownList>
+<%--            <asp:DropDownList runat="server" ID="ddlContactCategory" CssClass="form-control" ></asp:DropDownList>--%>
+            <asp:CheckBoxList runat="server" ID="cblContactCategoryID"></asp:CheckBoxList>
         </div>
     </div><br />
     <div class ="row">
@@ -95,6 +96,14 @@
         </div>
         <div class="col-md-8">
             <asp:TextBox runat="server" ID="txtAddress" CssClass="form-control"></asp:TextBox>
+        </div>
+    </div><br />
+    <div class ="row">
+        <div class="col-md-4">
+            Upload Photo
+        </div>
+        <div class="col-md-8">
+            <asp:FileUpload runat="server" ID="fuFile" />
         </div>
     </div><br />
     <div class="row">
